@@ -3,8 +3,8 @@
 <form enctype="multipart/form-data" action="<?php echo base_url('depan/aduanbaru_simpan'); ?>" method="post">
     <p class="font-weight-bold mb-2 mt-2">1) Sila nyatakan aduan anda;</p>
     <div class="form-group">
-        <label for="butiran">a) Butiran:</label>
-        <textarea name="butiran" id="butiran" class="form-control" required></textarea>
+        <label for="ringkasan">a) Ringkasan Aduan:</label>
+        <textarea name="ringkasan" id="ringkasan" class="form-control" required></textarea>
         <div>
             (sila berikan butiran lengkap mengenai aduan/maklumbalas yang diberikan)
         </div>
@@ -15,7 +15,11 @@
                 <label for="jabatan">b) Jabatan/Unit terlibat:</label>
                 <select name="jabatan" id="jabatan" class="form-control" required>
                     <option value=""></option>
-
+                    <?php
+                    foreach ($listjabatan as $jabatan) {
+                        echo "<option value=\"$jabatan->idjabatan\">$jabatan->namajabatan</option>";
+                    }
+                    ?>
                 </select>
             </div>
         </div>
@@ -70,15 +74,9 @@
         </div>
         <div class="col-sm-3">
             <p class="font-weight-bold mb-2 mt-2">Kod Sulit:</p>
-            <div class="row">
-                <div class="col-sm-7">
-                    <label for="kodsulit">Sila taip semula kod sulit ini</label>
-                </div>
-                <div class="col-sm-5">
-                    <img src="<?php echo base_url('depan/mycaptcha'); ?>" alt="CAPTCHA" class="img-fluid" style="min-width: 100%;">
-                </div>
-            </div>
 
+            <img src="<?php echo base_url('depan/mycaptcha'); ?>" alt="CAPTCHA" class="img-fluid" style="min-width: 100%;">
+            <label for="kodsulit">Sila taip semula tanpa jarak</label>
             <div class="from-group">
                 <div class="input-group">
                     <input name="kodsulit" id="kodsulit" type="text" class="form-control" required minlength="6" maxlength="6">
