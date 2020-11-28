@@ -61,7 +61,11 @@ if (count($listaduan)) {
                     <td><?php echo $row->status; ?></td>
                     <td>
                         <a href="<?php
-                        echo base_url('depan/detailaduan/' . $row->idaduan);
+                        if ($row->status != 'Selesai') {
+                            echo base_url('depan/detailaduan/' . $row->idaduan);
+                        } else {
+                            echo base_url('depan/jawapan/' . $row->idaduan);
+                        }
                         ?>" class="btn btn-outline-primary">Papar</a>
                     </td>
                 </tr>

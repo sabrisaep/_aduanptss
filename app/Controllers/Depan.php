@@ -169,9 +169,18 @@ class Depan extends BaseController
         $model->join('pengadu', 'aduan.pengadu = pengadu.idpengadu');
         $model->orderBy('aduan.tarikhaduan', 'DESC');
 
+        $session = session();
         if ($this->request->getVar('nokp')) {
             $nokp = $this->request->getVar('nokp');
+            $session->set(['nokp' => $nokp]);
             $model->where(['pengadu.nokppengadu' => $nokp]);
+            if ($model->countAllResults(false)) {
+                $listaduan = $model->get()->getResultObject();
+            } else {
+                $tiada = true;
+            }
+        } elseif ($session->nokp) {
+            $model->where(['pengadu.nokppengadu' => $session->nokp]);
             if ($model->countAllResults(false)) {
                 $listaduan = $model->get()->getResultObject();
             } else {
@@ -189,4 +198,87 @@ class Depan extends BaseController
         echo view('depan/bawah');
     }
 
+    public function detailaduan($idaduan)
+    {
+        $model = new AduanModel();
+        $model->join('pengadu', 'aduan.pengadu = pengadu.idpengadu');
+        $session = session();
+        $syarat = [
+            'idaduan' => $idaduan,
+            'nokppengadu' => $session->nokp,
+        ];
+        $model->where($syarat);
+        if ($model->countAllResults(false)) {
+            $data = ['row' => $model->get()->getRowObject()];
+
+            echo view('depan/atas');
+            echo view('depan/detailaduan', $data);
+            echo view('depan/bawah');
+            return 0;
+        } else {
+            return redirect()->to(base_url('depan/semakaduan'));
+        }
+    }
+
+    public function paparlampiran($idaduan)
+    {
+        $model = new AduanModel();
+        $model->join('pengadu', 'aduan.pengadu = pengadu.idpengadu');
+        $session = session();
+        $syarat = [
+            'idaduan' => $idaduan,
+            'nokppengadu' => $session->nokp,
+        ];
+        $model->where($syarat);
+        if ($model->countAllResults(false)) {
+            $row = $model->get()->getRowObject();
+            return $this->response->download(WRITEPATH . 'uploads/' . $row->lampiran, null);
+        } else {
+            return redirect()->to(base_url('depan/semakaduan'));
+        }
+    }
+
+    public function jawapan($idaduan)
+    {
+        $model = new AduanModel();
+        $model->join('pengadu', 'aduan.pengadu = pengadu.idpengadu');
+        $session = session();
+        $syarat = [
+            'idaduan' => $idaduan,
+            'nokppengadu' => $session->nokp,
+        ];
+        $model->where($syarat);
+        if ($model->countAllResults(false)) {
+            $data = ['row' => $model->get()->getRowObject()];
+
+            helper('tarikh_helper');
+
+            echo view('depan/atas');
+            echo view('depan/jawapan', $data);
+            echo view('depan/bawah');
+            return 0;
+        } else {
+            return redirect()->to(base_url('depan/semakaduan'));
+        }
+    }
+
+    public function cetakjawapan($idaduan)
+    {
+        $model = new AduanModel();
+        $model->join('pengadu', 'aduan.pengadu = pengadu.idpengadu');
+        $session = session();
+        $syarat = [
+            'idaduan' => $idaduan,
+            'nokppengadu' => $session->nokp,
+        ];
+        $model->where($syarat);
+        if ($model->countAllResults(false)) {
+            $data = ['row' => $model->get()->getRowObject()];
+
+            helper('tarikh_helper');
+            return view('depan/cetakjawapan', $data);
+        } else {
+            return redirect()->to(base_url('depan/semakaduan'));
+        }
+    }
 }
