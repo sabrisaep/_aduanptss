@@ -23,7 +23,7 @@
 <p><?php echo nl2br($row->jawapanrasmi); ?></p>
 
 <p>Sekian, terima kasih.</p>
-<p>"BERKHIDMATA UNTUK NEGARA"</p>
+<p>"BERKHIDMAT UNTUK NEGARA"</p>
 <p>Saya yang menjalankan amanah,</p>
 <p>
     <?php echo $row->namappa; ?><br>

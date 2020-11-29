@@ -24,7 +24,7 @@ class Depan extends BaseController
     {
         $ppa = [
             'Pegawai Perhubungan Awam',
-            'Pegawai Khidmat Pelangan',
+            'Pegawai Khidmat Pelanggan',
         ];
         $kjku = [
             'Ketua Jabatan',
@@ -36,6 +36,7 @@ class Depan extends BaseController
             'TPSA',
         ];
 
+        $session = session();
         $idp = $this->request->getVar('idp');
         $kata = $this->request->getVar('kata');
 
@@ -46,29 +47,36 @@ class Depan extends BaseController
             $row = $model->get()->getRowObject();
             if (password_verify($kata, $row->kata)) {
                 if (in_array($row->namajawatan, $ppa)) {
+                    $session->set(['idpegawai' => $row->idpegawai]);
                     return redirect()->to(base_url('ppa'));
                 } elseif (in_array($row->namajawatan, $kjku)) {
+                    $session->set(['idpegawai' => $row->idpegawai]);
                     return redirect()->to(base_url('kjku'));
                 } elseif (in_array($row->namajawatan, $pengarah)) {
+                    $session->set(['idpegawai' => $row->idpegawai]);
                     return redirect()->to(base_url('pengarah'));
                 } else {
-                    $session = session();
                     $session->set(['mesej' => 'Maaf, anda gagal log masuk.']);
                     $session->markAsFlashdata('mesej');
                     return redirect()->to(base_url());
                 }
             } else {
-                $session = session();
                 $session->set(['mesej' => 'Maaf, anda gagal log masuk.']);
                 $session->markAsFlashdata('mesej');
                 return redirect()->to(base_url());
             }
         } else {
-            $session = session();
             $session->set(['mesej' => 'Maaf, anda gagal log masuk.']);
             $session->markAsFlashdata('mesej');
             return redirect()->to(base_url());
         }
+    }
+
+    public function logout()
+    {
+        $session = session();
+        $session->destroy();
+        return redirect()->to(base_url());
     }
 
     public function mycaptcha()
