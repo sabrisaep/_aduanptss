@@ -221,4 +221,22 @@ class Ppa extends BaseController
         echo view('ppa/bawah', $bawah);
         return 0;
     }
+
+    public function graf()
+    {
+        if (!$this->mula()) return redirect()->to(base_url());
+
+        $data = [];
+        $bawah = ['namapegawai' => $this->namapegawai()];
+
+        echo view('ppa/atas');
+        echo view('ppa/graf', $data);
+        echo view('ppa/bawah', $bawah);
+        return 0;
+    }
+
+    public function chart()
+    {
+        # https://packagist.org/packages/amenadiel/jpgraph
+    }
 }
