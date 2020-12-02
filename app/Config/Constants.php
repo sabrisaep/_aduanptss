@@ -90,5 +90,5 @@ defined('JENIS') || define('JENIS', [
 ]);
 
 $server = $_SERVER['SERVER_NAME'];
-$base = (strstr($server, 'apps.ptss.edu.my')) ? 'https://apps.ptss.edu.my/sarkes/' : 'http://apps.poliperlis.edu.my/sarkes/';
+$base = (strstr($server, 'apps.ptss.edu.my')) ? 'https://apps.ptss.edu.my/aduanptss/' : 'http://apps.poliperlis.edu.my/aduanptss/';
 defined('BASE') || define('BASE', $base);

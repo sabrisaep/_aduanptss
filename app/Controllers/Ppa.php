@@ -1,5 +1,8 @@
 <?php namespace App\Controllers;
 
+use Amenadiel\JpGraph\Graph;
+use Amenadiel\JpGraph\Plot;
+
 use App\Models\AduanModel;
 use App\Models\PegawaiModel;
 
@@ -226,17 +229,17 @@ class Ppa extends BaseController
     {
         if (!$this->mula()) return redirect()->to(base_url());
 
-        $data = [];
+        $data = [
+            'tahun' => ['2021', '2020',],
+            'dalam' => [40, 60,],
+            'selesai' => [40, 50,],
+            'terima' => [80, 110,],
+        ];
         $bawah = ['namapegawai' => $this->namapegawai()];
 
         echo view('ppa/atas');
         echo view('ppa/graf', $data);
         echo view('ppa/bawah', $bawah);
         return 0;
-    }
-
-    public function chart()
-    {
-        # https://packagist.org/packages/amenadiel/jpgraph
     }
 }
