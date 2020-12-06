@@ -1,15 +1,25 @@
-<div class="row">
-    <div class="col-sm-10">
-        <h2>Statistik Maklumbalas Aduan Pelanggan</h2>
-    </div>
-    <div class="col-sm-2 text-right">
-        <a href="<?php echo base_url('ppa/cetakstatistik'); ?>"
-           class="btn btn-primary">Cetak</a>
-    </div>
-</div>
+<!doctype html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Aduan Awam PTSS</title>
+    <link href="<?php echo base_url('assets/css/cetak.css'); ?>" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <p class="sorok">
+        <button type="button" onclick="print()">CETAK</button>
+        <button type="button" onclick="window.location='<?php echo base_url('ppa/statistik'); ?>'">
+            TUTUP
+        </button>
+    </p>
 
-<div class="table-responsive">
-    <table class="table">
+    <h2>Statistik Maklumbalas Aduan Pelanggan</h2>
+
+    <table class="table statistik">
         <thead>
         <tr>
             <th rowspan="2"></th>
@@ -61,3 +71,5 @@
         </tbody>
     </table>
 </div>
+</body>
+</html>

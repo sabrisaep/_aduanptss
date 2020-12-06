@@ -1,8 +1,5 @@
 <?php namespace App\Controllers;
 
-use Amenadiel\JpGraph\Graph;
-use Amenadiel\JpGraph\Plot;
-
 use App\Models\AduanModel;
 use App\Models\PegawaiModel;
 
@@ -229,24 +226,21 @@ class Ppa extends BaseController
     {
         if (!$this->mula()) return redirect()->to(base_url());
 
-        $data = [
-            'tahun' => ['2021', '2020',],
-            'dalam' => [40, 60,],
-            'selesai' => [40, 50,],
-            'terima' => [80, 110,],
-        ];
         $bawah = ['namapegawai' => $this->namapegawai()];
 
         echo view('ppa/atas');
-        echo view('ppa/graf', $data);
+        echo view('ppa/graf');
         echo view('ppa/bawah', $bawah);
         return 0;
     }
 
-    public function statistik()
+    public function cetakgraf()
     {
-        if (!$this->mula()) return redirect()->to(base_url());
+        echo view('ppa/cetakgraf');
+    }
 
+    private function datastatistik()
+    {
         $model = new AduanModel();
         $tahun1 = date('Y');
         $tahun0 = $tahun1 - 1;
@@ -316,11 +310,30 @@ class Ppa extends BaseController
             't1' => $t1,
             'jenisjenis' => $jenisjenis,
         ];
+
+        return $data;
+    }
+
+    public function statistik()
+    {
+        if (!$this->mula()) return redirect()->to(base_url());
+
+        $data = $this->datastatistik();
         $bawah = ['namapegawai' => $this->namapegawai()];
 
         echo view('ppa/atas');
         echo view('ppa/statistik', $data);
         echo view('ppa/bawah', $bawah);
+        return 0;
+    }
+
+    public function cetakstatistik()
+    {
+        if (!$this->mula()) return redirect()->to(base_url());
+
+        $data = $this->datastatistik();
+
+        echo view('ppa/cetakstatistik', $data);
         return 0;
     }
 }
