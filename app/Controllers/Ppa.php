@@ -242,4 +242,85 @@ class Ppa extends BaseController
         echo view('ppa/bawah', $bawah);
         return 0;
     }
+
+    public function statistik()
+    {
+        if (!$this->mula()) return redirect()->to(base_url());
+
+        $model = new AduanModel();
+        $tahun1 = date('Y');
+        $tahun0 = $tahun1 - 1;
+
+        # bilangan aduan yang diterima
+        $syarat = ['YEAR(tarikhterima)' => $tahun0,];
+        $model->where($syarat);
+        $t0['semua'] = $model->countAllResults();
+
+        $syarat = ['YEAR(tarikhterima)' => $tahun1,];
+        $model->where($syarat);
+        $t1['semua'] = $model->countAllResults();
+
+        # bilangan aduan yang diselesaikan dalam tempoh 14 hari bekerja
+        $syarat = [
+            'YEAR(tarikhterima)' => $tahun0,
+            'status' => 'Selesai',
+            'DATEDIFF(tarikhjawapanrasmi, tarikhterima) <' => 18,
+        ];
+        $model->where($syarat);
+        $t0['siapawai'] = $model->countAllResults();
+
+        $syarat = [
+            'YEAR(tarikhterima)' => $tahun1,
+            'status' => 'Selesai',
+            'DATEDIFF(tarikhjawapanrasmi, tarikhterima) <' => 18,
+        ];
+        $model->where($syarat);
+        $t1['siapawai'] = $model->countAllResults();
+
+        # bilangan aduan dalam tindakan
+        $syarat = [
+            'YEAR(tarikhterima)' => $tahun0,
+            'status !=' => 'Selesai',
+        ];
+        $model->where($syarat);
+        $t0['takselesai'] = $model->countAllResults();
+
+        $syarat = [
+            'YEAR(tarikhterima)' => $tahun1,
+            'status !=' => 'Selesai',
+        ];
+        $model->where($syarat);
+        $t1['takselesai'] = $model->countAllResults();
+
+        # jenis-jeins aduan
+        foreach (JENIS as $jenis) {
+            $syarat = [
+                'YEAR(tarikhterima)' => $tahun0,
+                'jenis' => $jenis,
+            ];
+            $model->where($syarat);
+            $jenisjenis[0][$jenis] = $model->countAllResults();
+
+            $syarat = [
+                'YEAR(tarikhterima)' => $tahun1,
+                'jenis' => $jenis,
+            ];
+            $model->where($syarat);
+            $jenisjenis[1][$jenis] = $model->countAllResults();
+        }
+
+        $data = [
+            'tahun0' => $tahun0,
+            'tahun1' => $tahun1,
+            't0' => $t0,
+            't1' => $t1,
+            'jenisjenis' => $jenisjenis,
+        ];
+        $bawah = ['namapegawai' => $this->namapegawai()];
+
+        echo view('ppa/atas');
+        echo view('ppa/statistik', $data);
+        echo view('ppa/bawah', $bawah);
+        return 0;
+    }
 }
