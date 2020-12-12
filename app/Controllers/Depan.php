@@ -141,6 +141,8 @@ class Depan extends BaseController
             ];
             $modelAduan->insert($aduan);
 
+            # TODO hantar emel kepada PPA
+
             return redirect()->to(base_url('depan/aduanbaru_terima'));
         }
     }
@@ -258,7 +260,6 @@ class Depan extends BaseController
         $model->where($syarat);
         if ($model->countAllResults(false)) {
             $data = ['row' => $model->get()->getRowObject()];
-
             helper('tarikh_helper');
 
             echo view('depan/atas');
