@@ -236,11 +236,16 @@ class Ppa extends BaseController
 
     public function cetakgraf()
     {
-        echo view('ppa/cetakgraf');
+        $session = session();
+        if ($session->userlevel) {
+            $data = ['userlevel' => $session->userlevel];
+            echo view('ppa/cetakgraf', $data);
+        }
     }
 
-    private function datastatistik()
+    public function datastatistik()
     {
+        $session = session();
         $model = new AduanModel();
         $tahun1 = date('Y');
         $tahun0 = $tahun1 - 1;
@@ -309,6 +314,7 @@ class Ppa extends BaseController
             't0' => $t0,
             't1' => $t1,
             'jenisjenis' => $jenisjenis,
+            'userlevel' => $session->userlevel,
         ];
 
         return $data;
@@ -332,7 +338,6 @@ class Ppa extends BaseController
         if (!$this->mula()) return redirect()->to(base_url());
 
         $data = $this->datastatistik();
-
         echo view('ppa/cetakstatistik', $data);
         return 0;
     }

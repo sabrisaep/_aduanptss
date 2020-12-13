@@ -12,7 +12,7 @@
 <div class="container">
     <p class="sorok">
         <button type="button" onclick="print()">CETAK</button>
-        <button type="button" onclick="window.location='<?php echo base_url('ppa/statistik'); ?>'">
+        <button type="button" onclick="window.location='<?php echo base_url($userlevel . '/statistik'); ?>'">
             TUTUP
         </button>
     </p>

@@ -47,13 +47,25 @@ class Depan extends BaseController
             $row = $model->get()->getRowObject();
             if (password_verify($kata, $row->kata)) {
                 if (in_array($row->namajawatan, $ppa)) {
-                    $session->set(['idpegawai' => $row->idpegawai]);
+                    $newdata = [
+                        'idpegawai' => $row->idpegawai,
+                        'userlevel' => 'ppa',
+                    ];
+                    $session->set($newdata);
                     return redirect()->to(base_url('ppa'));
                 } elseif (in_array($row->namajawatan, $kjku)) {
-                    $session->set(['idpegawai' => $row->idpegawai]);
+                    $newdata = [
+                        'idpegawai' => $row->idpegawai,
+                        'userlevel' => 'kjku',
+                    ];
+                    $session->set($newdata);
                     return redirect()->to(base_url('kjku'));
                 } elseif (in_array($row->namajawatan, $pengarah)) {
-                    $session->set(['idpegawai' => $row->idpegawai]);
+                    $newdata = [
+                        'idpegawai' => $row->idpegawai,
+                        'userlevel' => 'pengarah',
+                    ];
+                    $session->set($newdata);
                     return redirect()->to(base_url('pengarah'));
                 } else {
                     $session->set(['mesej' => 'Maaf, anda gagal log masuk.']);
@@ -235,10 +247,18 @@ class Depan extends BaseController
         $model = new AduanModel();
         $model->join('pengadu', 'aduan.pengadu = pengadu.idpengadu');
         $session = session();
-        $syarat = [
-            'idaduan' => $idaduan,
-            'nokppengadu' => $session->nokp,
-        ];
+        if ($session->nokp) {
+            $syarat = [
+                'idaduan' => $idaduan,
+                'nokppengadu' => $session->nokp,
+            ];
+        } elseif ($session->idpegawai) {
+            $syarat = [
+                'idaduan' => $idaduan,
+            ];
+        } else {
+            return redirect()->to(base_url());
+        }
         $model->where($syarat);
         if ($model->countAllResults(false)) {
             $row = $model->get()->getRowObject();
