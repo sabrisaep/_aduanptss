@@ -21,8 +21,8 @@ class App extends BaseConfig
 	| environments.
 	|
 	*/
-	# public $baseURL = 'http://apps.localhost/aduanptss/';
-    public $baseURL = BASE;
+	public $baseURL = 'http://apps.localhost/aduanptss/';
+    # public $baseURL = BASE;
 
 	/*
 	|--------------------------------------------------------------------------

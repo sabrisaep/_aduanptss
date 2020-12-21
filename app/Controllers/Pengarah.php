@@ -1,4 +1,6 @@
-<?php namespace App\Controllers;
+<?php
+
+namespace App\Controllers;
 
 use App\Models\AduanModel;
 use App\Models\PegawaiModel;
@@ -75,7 +77,9 @@ class Pengarah extends BaseController
 
     public function borangjawapan($idaduan)
     {
-        if (!$this->mula()) return redirect()->to(base_url());
+        if (!$this->mula()) {
+            return redirect()->to(base_url());
+        }
 
         $model = new AduanModel();
         $model->join('pengadu', 'aduan.pengadu = pengadu.idpengadu');
@@ -86,6 +90,7 @@ class Pengarah extends BaseController
         $model->where($syarat);
         if ($model->countAllResults(false)) {
             $data = ['row' => $model->get()->getRowObject()];
+            $data['user'] = 'pengarah';
 
             helper('tarikh_helper');
             echo view('pengarah/atas');

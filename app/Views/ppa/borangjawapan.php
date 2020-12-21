@@ -3,7 +3,7 @@
         <h2>Borang Jawapan Aduan Rasmi Dari KJ/KU</h2>
     </div>
     <?php
-    if ($row->status == 'Hampir Selesai') {
+    if ($row->status == 'Hampir Selesai' and $user == 'ppa') {
         ?>
         <div class="col-sm-2 text-right">
             <div class="btn-group">

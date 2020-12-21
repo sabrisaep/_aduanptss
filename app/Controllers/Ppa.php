@@ -132,6 +132,7 @@ class Ppa extends BaseController
         $model->where($syarat);
         if ($model->countAllResults(false)) {
             $data = ['row' => $model->get()->getRowObject()];
+            $data['user'] = 'ppa';
             $bawah = ['namapegawai' => $this->namapegawai()];
 
             helper('tarikh_helper');
