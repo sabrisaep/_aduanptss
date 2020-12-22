@@ -13,6 +13,17 @@
             kerana mengakses sistem ini. Maklumbalas anda amat
             penting untuk meningkatkan mutu perkhidmatan di PTSS.
         </p>
+
+        <h3>Ujian Sistem</h3>
+        <p>
+            Sila buat aduan melalui sistem ini, samada aduan sebenar 
+            atau aduan rekaan, untuk tujuan pengujian.
+            Sekiranya ada sebarang pertanyaan, sila hubungi PRO.
+            Selepas itu, kemukakan komen dan cadangan anda melalui
+            <a href="http://bit.ly/CadanganKomenAduanPTSS" target="_blank">
+                Google Form ini
+            </a>
+        </p>
     </div>
     <div class="col-sm-3">
         <div class="card">
