@@ -18,13 +18,17 @@
         <p>
             Sila buat aduan melalui sistem ini, samada aduan sebenar 
             atau aduan rekaan, untuk tujuan pengujian.
-            Sekiranya ada sebarang pertanyaan, sila hubungi PRO.
             Selepas itu, kemukakan komen dan cadangan anda.
         </p>
         <p>
             <a class="btn btn-outline-primary" href="http://bit.ly/CadanganKomenAduanPTSS" target="_blank">
                 Komen &amp; Cadangan
             </a>
+        </p>
+        <p>
+            Ujian ini akan dijalankan sehingga 8 Januari 2021.
+            Selepas itu, semua data ujian akan dipadam dari sistem.
+            Sekiranya ada sebarang pertanyaan, sila hubungi PRO.
         </p>
     </div>
     <div class="col-sm-3">
