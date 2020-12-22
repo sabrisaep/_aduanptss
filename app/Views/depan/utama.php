@@ -14,7 +14,7 @@
             penting untuk meningkatkan mutu perkhidmatan di PTSS.
         </p>
 
-        <4>Ujian Sistem</4>
+        <h4>Ujian Sistem</h4>
         <p>
             Sila buat aduan melalui sistem ini, samada aduan sebenar 
             atau aduan rekaan, untuk tujuan pengujian.
@@ -30,7 +30,7 @@
     <div class="col-sm-3">
         <div class="card">
             <div class="card-header bg-primary text-white">
-                <h4 class="m-0">Log Masuk</h4>
+                <hh4 class="m-0">Log Masuk</hh4>
             </div>
             <div class="card-body">
                 <form action="<?php echo base_url('depan/login'); ?>" method="post">
