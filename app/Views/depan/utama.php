@@ -14,14 +14,16 @@
             penting untuk meningkatkan mutu perkhidmatan di PTSS.
         </p>
 
-        <h3>Ujian Sistem</h3>
+        <4>Ujian Sistem</4>
         <p>
             Sila buat aduan melalui sistem ini, samada aduan sebenar 
             atau aduan rekaan, untuk tujuan pengujian.
             Sekiranya ada sebarang pertanyaan, sila hubungi PRO.
-            Selepas itu, kemukakan komen dan cadangan anda melalui
-            <a href="http://bit.ly/CadanganKomenAduanPTSS" target="_blank">
-                Google Form ini
+            Selepas itu, kemukakan komen dan cadangan anda.
+        </p>
+        <p>
+            <a class="btn btn-outline-primary" href="http://bit.ly/CadanganKomenAduanPTSS" target="_blank">
+                Komen &amp; Cadangan
             </a>
         </p>
     </div>
